@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: _getRoute,
     );
   }
+
   Route<dynamic> _getRoute(RouteSettings settings) {
     if (settings.name != '/login') {
       return null;
@@ -23,7 +24,6 @@ class MyApp extends StatelessWidget {
     return MaterialPageRoute<void>(
         settings: settings,
         builder: (BuildContext context) => LoginPage(),
-        fullscreenDialog: true
-    );
+        fullscreenDialog: true);
   }
 }

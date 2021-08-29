@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:odoo_api/odoo_api.dart';
 
-var client = new OdooClient("http://35.240.181.0:8069");
+var client = new OdooClient("https://wellhealthy.co");
 
 class LoginPage extends StatefulWidget {
   @override
@@ -9,7 +9,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
   String email;
   String password;
   String database;
@@ -21,8 +20,9 @@ class _LoginPageState extends State<LoginPage> {
         padding: EdgeInsets.all(20.0),
         child: ListView(
           children: <Widget>[
-            Container(child:
-              getIconAsset(),),
+            Container(
+              child: getIconAsset(),
+            ),
             Container(
               alignment: Alignment.center,
               child: Text(
@@ -36,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
               padding: EdgeInsets.symmetric(horizontal: 30.0),
               child: TextField(
                 decoration: InputDecoration(
-                    labelText: 'Database',
+                  labelText: 'Database',
                 ),
                 onChanged: (value) {
                   this.database = value;
@@ -47,10 +47,8 @@ class _LoginPageState extends State<LoginPage> {
               padding: EdgeInsets.symmetric(horizontal: 30.0),
               child: TextField(
                 decoration: InputDecoration(
-                    labelText: 'E-mail',
-                    hintText: 'example@site.com'
-                ),
-                onChanged: (value){
+                    labelText: 'E-mail', hintText: 'example@site.com'),
+                onChanged: (value) {
                   this.email = value;
                 },
               ),
@@ -59,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
               padding: EdgeInsets.symmetric(horizontal: 30.0),
               child: TextField(
                 decoration: InputDecoration(
-                    labelText: 'Password',
+                  labelText: 'Password',
                 ),
                 onChanged: (value) {
                   this.password = value;
@@ -82,9 +80,11 @@ class _LoginPageState extends State<LoginPage> {
                     child: RaisedButton(
                       color: Colors.blue,
                       disabledColor: Colors.transparent,
-                      onPressed: (){
-                        client.authenticate(email, password, database).then((auth) {
-                          if(auth.isSuccess) {
+                      onPressed: () {
+                        client
+                            .authenticate(email, password, database)
+                            .then((auth) {
+                          if (auth.isSuccess) {
                             final user = auth.getUser();
                             print("Hello ${user.name}");
                             Navigator.pop(context);
@@ -93,9 +93,12 @@ class _LoginPageState extends State<LoginPage> {
                           }
                         });
                       },
-                      child: Text('Log In',style: TextStyle(
-                        color: Colors.white,
-                      ),),
+                      child: Text(
+                        'Log In',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -109,11 +112,13 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     child: RaisedButton(
                       disabledColor: Colors.transparent,
-                      onPressed: () {
-                      },
-                      child: Text('Forgot Password?', style: TextStyle(
-                        color: Colors.blue,
-                      ),),
+                      onPressed: () {},
+                      child: Text(
+                        'Forgot Password?',
+                        style: TextStyle(
+                          color: Colors.blue,
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -126,8 +131,14 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
-Widget getIconAsset () {
+Widget getIconAsset() {
   AssetImage assetImage = AssetImage('assets/jicon.png');
-  Image image = Image(image: assetImage,width: 150.0, height: 150.0,);
-  return Container(child: image,);
+  Image image = Image(
+    image: assetImage,
+    width: 150.0,
+    height: 150.0,
+  );
+  return Container(
+    child: image,
+  );
 }

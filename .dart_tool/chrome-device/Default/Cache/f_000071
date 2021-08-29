@@ -1,0 +1,349 @@
+define(['dart_sdk', 'packages/http/src/browser_client.dart', 'packages/uuid/uuid.dart'], (function load__packages__odoo_api__odoo_version_dart(dart_sdk, packages__http__src__browser_client$46dart, packages__uuid__uuid$46dart) {
+  'use strict';
+  const core = dart_sdk.core;
+  const _js_helper = dart_sdk._js_helper;
+  const async = dart_sdk.async;
+  const convert = dart_sdk.convert;
+  const dart = dart_sdk.dart;
+  const dartx = dart_sdk.dartx;
+  const client = packages__http__src__browser_client$46dart.src__client;
+  const response = packages__http__src__browser_client$46dart.src__response;
+  const uuid = packages__uuid__uuid$46dart.uuid;
+  var odoo_version = Object.create(dart.library);
+  var odoo_api_connector = Object.create(dart.library);
+  var $_get = dartx._get;
+  var $length = dartx.length;
+  var $last = dartx.last;
+  var $toString = dartx.toString;
+  var $_set = dartx._set;
+  var $indexOf = dartx.indexOf;
+  var $substring = dartx.substring;
+  var $split = dartx.split;
+  dart._checkModuleNullSafetyMode(false);
+  var T = {
+    StringL: () => (T.StringL = dart.constFn(dart.legacy(core.String)))(),
+    intL: () => (T.intL = dart.constFn(dart.legacy(core.int)))(),
+    MapL: () => (T.MapL = dart.constFn(dart.legacy(core.Map)))(),
+    ListL: () => (T.ListL = dart.constFn(dart.legacy(core.List)))(),
+    IdentityMapOfStringL$StringL: () => (T.IdentityMapOfStringL$StringL = dart.constFn(_js_helper.IdentityMap$(T.StringL(), T.StringL())))(),
+    OdooVersionL: () => (T.OdooVersionL = dart.constFn(dart.legacy(odoo_version.OdooVersion)))(),
+    OdooResponseL: () => (T.OdooResponseL = dart.constFn(dart.legacy(odoo_api_connector.OdooResponse)))()
+  };
+  const CT = Object.create({
+    _: () => (C, CT)
+  });
+  var I = [
+    "package:odoo_api/odoo_version.dart",
+    "package:odoo_api/odoo_api_connector.dart"
+  ];
+  var _version = dart.privateName(odoo_version, "_version");
+  var _serverSerie = dart.privateName(odoo_version, "_serverSerie");
+  var _protocolVersion = dart.privateName(odoo_version, "_protocolVersion");
+  var _major = dart.privateName(odoo_version, "_major");
+  var _minor = dart.privateName(odoo_version, "_minor");
+  var _micro = dart.privateName(odoo_version, "_micro");
+  var _releaseLevel = dart.privateName(odoo_version, "_releaseLevel");
+  var _serial = dart.privateName(odoo_version, "_serial");
+  var _isEnterprise = dart.privateName(odoo_version, "_isEnterprise");
+  odoo_version.OdooVersion = class OdooVersion extends core.Object {
+    getVersionInfo() {
+      return T.StringL().as(this[_version]);
+    }
+    getServerSerie() {
+      return T.intL().as(this[_serverSerie]);
+    }
+    getProtocolVersion() {
+      return T.intL().as(this[_protocolVersion]);
+    }
+    getMajorVersion() {
+      return this[_major];
+    }
+    getMinorVersion() {
+      return T.intL().as(this[_minor]);
+    }
+    getMicroVersion() {
+      return T.intL().as(this[_micro]);
+    }
+    getReleaseLevel() {
+      return T.StringL().as(this[_releaseLevel]);
+    }
+    getSerial() {
+      return T.StringL().as(this[_serial]);
+    }
+    isEnterprise() {
+      return this[_isEnterprise];
+    }
+    parse(response) {
+      let result = T.MapL().as(response.getResult());
+      this[_version] = result[$_get]("server_version");
+      this[_serverSerie] = result[$_get]("server_serie");
+      this[_protocolVersion] = result[$_get]("protocol_version");
+      let versionInfo = T.ListL().as(result[$_get]("server_version_info"));
+      if (versionInfo[$length] === 6) {
+        this[_isEnterprise] = dart.equals(versionInfo[$last], "e");
+      }
+      this[_major] = versionInfo[$_get](0);
+      this[_minor] = versionInfo[$_get](1);
+      this[_micro] = versionInfo[$_get](2);
+      this[_releaseLevel] = versionInfo[$_get](3);
+      this[_serial] = versionInfo[$_get](4);
+      return this;
+    }
+    toString() {
+      if (this[_version] != null) {
+        return dart.str(this[_version]) + " (" + (dart.test(this[_isEnterprise]) ? "Enterprise" : "Community") + ")";
+      }
+      return "Not Connected: Please call connect() or getVersionInfo() with callback.";
+    }
+  };
+  (odoo_version.OdooVersion.new = function() {
+    this[_version] = null;
+    this[_serverSerie] = null;
+    this[_protocolVersion] = null;
+    this[_major] = null;
+    this[_minor] = null;
+    this[_micro] = null;
+    this[_releaseLevel] = null;
+    this[_serial] = null;
+    this[_isEnterprise] = false;
+    ;
+  }).prototype = odoo_version.OdooVersion.prototype;
+  dart.addTypeTests(odoo_version.OdooVersion);
+  dart.addTypeCaches(odoo_version.OdooVersion);
+  dart.setMethodSignature(odoo_version.OdooVersion, () => ({
+    __proto__: dart.getMethods(odoo_version.OdooVersion.__proto__),
+    getVersionInfo: dart.fnType(dart.legacy(core.String), []),
+    getServerSerie: dart.fnType(dart.legacy(core.int), []),
+    getProtocolVersion: dart.fnType(dart.legacy(core.int), []),
+    getMajorVersion: dart.fnType(dart.dynamic, []),
+    getMinorVersion: dart.fnType(dart.legacy(core.int), []),
+    getMicroVersion: dart.fnType(dart.legacy(core.int), []),
+    getReleaseLevel: dart.fnType(dart.legacy(core.String), []),
+    getSerial: dart.fnType(dart.legacy(core.String), []),
+    isEnterprise: dart.fnType(dart.legacy(core.bool), []),
+    parse: dart.fnType(dart.legacy(odoo_version.OdooVersion), [dart.legacy(odoo_api_connector.OdooResponse)]),
+    toString: dart.fnType(dart.legacy(core.String), []),
+    [$toString]: dart.fnType(dart.legacy(core.String), [])
+  }));
+  dart.setLibraryUri(odoo_version.OdooVersion, I[0]);
+  dart.setFieldSignature(odoo_version.OdooVersion, () => ({
+    __proto__: dart.getFields(odoo_version.OdooVersion.__proto__),
+    [_version]: dart.fieldType(dart.dynamic),
+    [_serverSerie]: dart.fieldType(dart.dynamic),
+    [_protocolVersion]: dart.fieldType(dart.dynamic),
+    [_major]: dart.fieldType(dart.dynamic),
+    [_minor]: dart.fieldType(dart.dynamic),
+    [_micro]: dart.fieldType(dart.dynamic),
+    [_releaseLevel]: dart.fieldType(dart.dynamic),
+    [_serial]: dart.fieldType(dart.dynamic),
+    [_isEnterprise]: dart.fieldType(dart.legacy(core.bool))
+  }));
+  dart.defineExtensionMethods(odoo_version.OdooVersion, ['toString']);
+  var odooVersion = dart.privateName(odoo_api_connector, "OdooConnector.odooVersion");
+  var _client = dart.privateName(odoo_api_connector, "_client");
+  var _serverURL = dart.privateName(odoo_api_connector, "_serverURL");
+  var _headers = dart.privateName(odoo_api_connector, "_headers");
+  var _debugRPC = dart.privateName(odoo_api_connector, "_debugRPC");
+  var _databases = dart.privateName(odoo_api_connector, "_databases");
+  var _sessionId = dart.privateName(odoo_api_connector, "_sessionId");
+  var _updateCookies = dart.privateName(odoo_api_connector, "_updateCookies");
+  odoo_api_connector.OdooConnector = class OdooConnector extends core.Object {
+    get odooVersion() {
+      return this[odooVersion];
+    }
+    set odooVersion(value) {
+      this[odooVersion] = value;
+    }
+    setSessionId(sessionId) {
+      this[_sessionId] = sessionId;
+    }
+    connect() {
+      return async.async(T.OdooVersionL(), (function* connect() {
+        this.odooVersion = (yield this.getVersionInfo());
+        this[_databases] = (yield this.getDatabases());
+        return this.odooVersion;
+      }).bind(this));
+    }
+    getVersionInfo() {
+      return async.async(T.OdooVersionL(), (function* getVersionInfo() {
+        let url = this.createPath("/web/webclient/version_info");
+        let response = (yield this.callRequest(url, this.createPayload(new _js_helper.LinkedMap.new())));
+        this.odooVersion = new odoo_version.OdooVersion.new().parse(response);
+        return this.odooVersion;
+      }).bind(this));
+    }
+    getDatabases() {
+      return async.async(T.ListL(), (function* getDatabases() {
+        if (this.odooVersion.getMajorVersion() == null) {
+          this.odooVersion = (yield this.getVersionInfo());
+        }
+        let url = this.getServerURL();
+        let params = new _js_helper.LinkedMap.new();
+        if (dart.equals(this.odooVersion.getMajorVersion(), 9)) {
+          url = this.createPath("/jsonrpc");
+          params[$_set]("method", "list");
+          params[$_set]("service", "db");
+          params[$_set]("args", []);
+        } else if (dart.dtest(dart.dsend(this.odooVersion.getMajorVersion(), '>=', [10]))) {
+          url = this.createPath("/web/database/list");
+          params[$_set]("context", new _js_helper.LinkedMap.new());
+        } else {
+          url = this.createPath("/web/database/get_list");
+          params[$_set]("context", new _js_helper.LinkedMap.new());
+        }
+        let response = (yield this.callRequest(url, this.createPayload(params)));
+        this[_databases] = T.ListL().as(response.getResult());
+        return this[_databases];
+      }).bind(this));
+    }
+    debugRPC(debug) {
+      this[_debugRPC] = debug;
+    }
+    getServerURL() {
+      return this[_serverURL];
+    }
+    createPath(path) {
+      return dart.notNull(this[_serverURL]) + dart.notNull(path);
+    }
+    createPayload(params) {
+      return new _js_helper.LinkedMap.from(["jsonrpc", "2.0", "method", "call", "params", params, "id", new uuid.Uuid.new().v1()]);
+    }
+    callRequest(url, payload) {
+      return async.async(T.OdooResponseL(), (function* callRequest() {
+        let body = convert.json.encode(payload);
+        this[_headers][$_set]("Content-type", "application/json");
+        if (this[_sessionId] != null) {
+          this[_headers][$_set]("Cookie", "session_id=" + dart.notNull(this[_sessionId]));
+        }
+        if (dart.test(this[_debugRPC])) {
+          core.print("-------------------------------------------");
+          core.print("REQUEST: " + dart.str(url));
+          core.print("PAYLOD : " + dart.str(payload));
+          core.print("HEADERS: " + dart.str(this[_headers]));
+          core.print("-------------------------------------------");
+        }
+        let response = (yield this[_client].post(url, {body: body, headers: this[_headers]}));
+        let sessionId = this[_updateCookies](response);
+        if (dart.test(this[_debugRPC])) {
+          core.print("============================================");
+          core.print("STATUS_C: " + dart.str(response.statusCode));
+          core.print("RESPONSE: " + dart.str(response.body));
+          core.print("============================================");
+        }
+        return new odoo_api_connector.OdooResponse.new(T.MapL().as(convert.json.decode(response.body)), response.statusCode, T.StringL().as(sessionId));
+      }).bind(this));
+    }
+    [_updateCookies](response) {
+      let rawCookie = response.headers[$_get]("set-cookie");
+      if (rawCookie != null) {
+        let index = rawCookie[$indexOf](";");
+        let cookie = index === -1 ? rawCookie : rawCookie[$substring](0, index);
+        this[_headers][$_set]("Cookie", cookie);
+        if (index > -1) {
+          return cookie[$split]("=")[$_get](1);
+        }
+      }
+      return null;
+    }
+  };
+  (odoo_api_connector.OdooConnector.new = function(serverURL) {
+    this[_client] = null;
+    this[_serverURL] = null;
+    this[_headers] = new (T.IdentityMapOfStringL$StringL()).new();
+    this[_debugRPC] = false;
+    this[odooVersion] = new odoo_version.OdooVersion.new();
+    this[_databases] = [];
+    this[_sessionId] = null;
+    this[_serverURL] = serverURL;
+    this[_client] = client.Client.new();
+  }).prototype = odoo_api_connector.OdooConnector.prototype;
+  dart.addTypeTests(odoo_api_connector.OdooConnector);
+  dart.addTypeCaches(odoo_api_connector.OdooConnector);
+  dart.setMethodSignature(odoo_api_connector.OdooConnector, () => ({
+    __proto__: dart.getMethods(odoo_api_connector.OdooConnector.__proto__),
+    setSessionId: dart.fnType(dart.void, [dart.legacy(core.String)]),
+    connect: dart.fnType(dart.legacy(async.Future$(dart.legacy(odoo_version.OdooVersion))), []),
+    getVersionInfo: dart.fnType(dart.legacy(async.Future$(dart.legacy(odoo_version.OdooVersion))), []),
+    getDatabases: dart.fnType(dart.legacy(async.Future$(dart.legacy(core.List))), []),
+    debugRPC: dart.fnType(dart.void, [dart.legacy(core.bool)]),
+    getServerURL: dart.fnType(dart.legacy(core.String), []),
+    createPath: dart.fnType(dart.legacy(core.String), [dart.legacy(core.String)]),
+    createPayload: dart.fnType(dart.legacy(core.Map), [dart.legacy(core.Map)]),
+    callRequest: dart.fnType(dart.legacy(async.Future$(dart.legacy(odoo_api_connector.OdooResponse))), [dart.legacy(core.String), dart.legacy(core.Map)]),
+    [_updateCookies]: dart.fnType(dart.dynamic, [dart.legacy(response.Response)])
+  }));
+  dart.setLibraryUri(odoo_api_connector.OdooConnector, I[1]);
+  dart.setFieldSignature(odoo_api_connector.OdooConnector, () => ({
+    __proto__: dart.getFields(odoo_api_connector.OdooConnector.__proto__),
+    [_client]: dart.fieldType(dart.legacy(client.Client)),
+    [_serverURL]: dart.fieldType(dart.legacy(core.String)),
+    [_headers]: dart.fieldType(dart.legacy(core.Map$(dart.legacy(core.String), dart.legacy(core.String)))),
+    [_debugRPC]: dart.fieldType(dart.legacy(core.bool)),
+    odooVersion: dart.fieldType(dart.legacy(odoo_version.OdooVersion)),
+    [_databases]: dart.fieldType(dart.legacy(core.List)),
+    [_sessionId]: dart.fieldType(dart.legacy(core.String))
+  }));
+  var _result = dart.privateName(odoo_api_connector, "_result");
+  var _statusCode = dart.privateName(odoo_api_connector, "_statusCode");
+  odoo_api_connector.OdooResponse = class OdooResponse extends core.Object {
+    hasError() {
+      return dart.dsend(this[_result], '_get', ["error"]) != null;
+    }
+    getError() {
+      return T.MapL().as(dart.dsend(this[_result], '_get', ["error"]));
+    }
+    getSessionId() {
+      return T.StringL().as(this[_sessionId]);
+    }
+    getErrorMessage() {
+      if (dart.test(this.hasError())) {
+        return T.StringL().as(dart.dsend(dart.dsend(this[_result], '_get', ["error"]), '_get', ["message"]));
+      }
+      return null;
+    }
+    getStatusCode() {
+      return T.intL().as(this[_statusCode]);
+    }
+    getResult() {
+      return dart.dsend(this[_result], '_get', ["result"]);
+    }
+  };
+  (odoo_api_connector.OdooResponse.new = function(result, statusCode, newSessionId) {
+    this[_result] = null;
+    this[_statusCode] = null;
+    this[_sessionId] = null;
+    this[_result] = result;
+    this[_statusCode] = statusCode;
+    this[_sessionId] = newSessionId;
+  }).prototype = odoo_api_connector.OdooResponse.prototype;
+  dart.addTypeTests(odoo_api_connector.OdooResponse);
+  dart.addTypeCaches(odoo_api_connector.OdooResponse);
+  dart.setMethodSignature(odoo_api_connector.OdooResponse, () => ({
+    __proto__: dart.getMethods(odoo_api_connector.OdooResponse.__proto__),
+    hasError: dart.fnType(dart.legacy(core.bool), []),
+    getError: dart.fnType(dart.legacy(core.Map), []),
+    getSessionId: dart.fnType(dart.legacy(core.String), []),
+    getErrorMessage: dart.fnType(dart.legacy(core.String), []),
+    getStatusCode: dart.fnType(dart.legacy(core.int), []),
+    getResult: dart.fnType(dart.dynamic, [])
+  }));
+  dart.setLibraryUri(odoo_api_connector.OdooResponse, I[1]);
+  dart.setFieldSignature(odoo_api_connector.OdooResponse, () => ({
+    __proto__: dart.getFields(odoo_api_connector.OdooResponse.__proto__),
+    [_result]: dart.fieldType(dart.dynamic),
+    [_statusCode]: dart.fieldType(dart.dynamic),
+    [_sessionId]: dart.fieldType(dart.dynamic)
+  }));
+  dart.trackLibraries("packages/odoo_api/odoo_version.dart", {
+    "package:odoo_api/odoo_version.dart": odoo_version,
+    "package:odoo_api/odoo_api_connector.dart": odoo_api_connector
+  }, {
+  }, '{"version":3,"sourceRoot":"","sources":["odoo_version.dart","odoo_api_connector.dart"],"names":[],"mappings":"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","file":"../../../../../../packages/odoo_api/odoo_version.dart.lib.js"}');
+  // Exports:
+  return {
+    odoo_version: odoo_version,
+    odoo_api_connector: odoo_api_connector
+  };
+}));
+
+//# sourceMappingURL=odoo_version.dart.lib.js.map
